@@ -1,23 +1,20 @@
-import logo from "./logo.svg";
 import "./index.css";
+import logo from "./images/logo.svg";
+import avatar from "./images/avatar.jpg";
 
 function App() {
   return (
     <div className="App body">
       <div className="page">
         <header className="header">
-          <img
-            src="<%=require('./images/logo.svg')%>"
-            alt="logo Around the U.S."
-            className="header__logo"
-          />
+          <img src={logo} alt="logo Around the U.S." className="header__logo" />
           <span className="header__line"></span>
         </header>
 
         <section className="profile">
           <div className="profile__avatar-container">
             <img
-              src="<%=require('./images/avatar.jpg')%>"
+              src={avatar}
               alt="imagen de perfil"
               className="profile__avatar"
             />

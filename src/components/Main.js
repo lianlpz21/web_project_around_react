@@ -57,9 +57,9 @@ function Main() {
             placeholder="Nombre"
             className="popup__input popup__input-cards"
             name="name"
-            autocomplete="given-name"
-            minlength="2"
-            maxlength="40"
+            autoComplete="given-name"
+            minLength="2"
+            maxLength="40"
           />
           <span className="error-message" id="input__name-error"></span>
           <input
@@ -69,8 +69,8 @@ function Main() {
             placeholder="Acerca de mi"
             className="popup__input popup__input-cards"
             name="job"
-            minlength="2"
-            maxlength="400"
+            minLength="2"
+            maxLength="400"
           />
           <span className="error-message" id="input__job-error"></span>
           <button disabled type="submit" className="popup__btn">
@@ -91,8 +91,8 @@ function Main() {
             type="text"
             placeholder="Titulo"
             name="title"
-            minlength="2"
-            maxlength="30"
+            minLength="2"
+            maxLength="30"
           />
           <span className="error-message" id="input__title-error"></span>
           <input
@@ -113,7 +113,7 @@ function Main() {
       <section className="cards"></section>
 
       <dialog className="modal">
-        <img className="modal__image" />
+        <img className="modal__image" alt="" />
         <span className="modal__title"></span>
         <button className="modal__icon-close"></button>
       </dialog>
@@ -136,7 +136,7 @@ function Main() {
 
       <template id="template">
         <figure className="card">
-          <img className="card__image" />
+          <img className="card__image" alt="" />
           <button className="card__trash"></button>
           <footer className="card__footer">
             <figcaption className="card__title"></figcaption>

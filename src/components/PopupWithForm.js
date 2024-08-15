@@ -6,7 +6,6 @@ export default function PopupWithForm(props) {
       }`}
       name={props.name}
     >
-      {props.children}
       <div className="overlay"></div>
       <div className="popup-content">
         <button
@@ -17,6 +16,7 @@ export default function PopupWithForm(props) {
         ></button>
         <fieldset className="popup__container popup__container-avatar">
           <h3 className="popup__title">{props.title}</h3>
+          {props.children}
           <button type="submit" className="popup__btn">
             {props.buttonText}
           </button>

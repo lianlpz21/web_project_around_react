@@ -1,12 +1,39 @@
-import avatar from "../images/avatar.jpg";
+// import avatar from "../images/avatar.jpg";
+import { useState, useEffect } from "react";
+import api from "../utils/api";
+import Card from "./Card";
 
 export default function Main(props) {
+  const [userName, setUserName] = useState("");
+  const [userDescription, setUserDescription] = useState("");
+  const [userAvatar, setUserAvatar] = useState("");
+  const [cards, setCards] = useState([]);
+
+  useEffect(() => {
+    async function getUserInfo() {
+      const response = await api.getUserInfo();
+      setUserAvatar(response.avatar);
+      setUserName(response.name);
+      setUserDescription(response.about);
+    }
+    getUserInfo();
+  }, []);
+
+  useEffect(() => {
+    async function getCards() {
+      const response = await api.getInitialCards();
+      setCards(response);
+    }
+    getCards();
+  });
+
   return (
     <main className="content">
       <section className="profile">
         <div className="profile__avatar-container">
           <img
-            src={avatar}
+            // src={avatar}
+            style={{ backgroundImage: `url(${userAvatar})` }}
             alt="imagen de perfil"
             className="profile__avatar"
           />
@@ -17,12 +44,12 @@ export default function Main(props) {
           ></button>
         </div>
         <div className="profile__info">
-          <h1 className="profile__name">Jacques Cousteau</h1>
+          <h1 className="profile__name">{userName}</h1>
           <button
             className="profile__edit-btn"
             onClick={props.onEditProfileClick}
           ></button>
-          <p className="profile__occupation">Explorador</p>
+          <p className="profile__occupation">{userDescription}</p>
         </div>
         <button
           className="profile__add-btn"
@@ -30,7 +57,18 @@ export default function Main(props) {
         ></button>
       </section>
 
-      <section className="cards"></section>
+      <section className="cards">
+        {cards.map((card) => {
+          return (
+            <Card
+              key={card._id}
+              link={card.link}
+              name={card.name}
+              likes={card.likes}
+            />
+          );
+        })}
+      </section>
 
       <form className="popup popup_type_confirm" id="popup_confirm">
         <div className="popup__content">
@@ -47,18 +85,6 @@ export default function Main(props) {
           </div>
         </div>
       </form>
-
-      <template id="template">
-        <figure className="card">
-          <img className="card__image" alt="" />
-          <button className="card__trash"></button>
-          <footer className="card__footer">
-            <figcaption className="card__title"></figcaption>
-            <button className="card__like"></button>
-            <span className="card__like-counter">0</span>
-          </footer>
-        </figure>
-      </template>
     </main>
   );
 }

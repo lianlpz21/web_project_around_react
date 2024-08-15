@@ -51,7 +51,7 @@
 .popup-content {
   background-color: white;
   max-width: 430px;
-  height: 330px;
+  /* height: 330px; */
   padding-bottom: 36px;
   border-radius: 10px;
   position: relative;
@@ -63,7 +63,7 @@
   font-size: 24px;
   font-weight: 900;
   line-height: 29.05px;
-  margin: 34px 0 0 0;
+  /* margin: 34px 0 0 0; */
 }
 
 .popup__update-avatar .popup__title {
@@ -71,15 +71,11 @@
 }
 
 .popup__input {
-  position: absolute;
+  /* position: absolute; */
   z-index: 99;
-  margin: 54px 0 30px 0;
+  /* margin: 54px 0 30px 0; */
   border: none;
   border-bottom: 1px solid #c4c4c4;
-}
-
-.popup__input:nth-of-type(2) {
-  margin-top: 100px;
 }
 
 .popup__input::placeholder {

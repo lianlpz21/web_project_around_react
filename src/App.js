@@ -60,7 +60,7 @@ function App() {
           isOpen={isEditProfileOpen}
           onClose={closeAllPopups}
           title="Editar perfil"
-          name="avatar"
+          name="Editar"
           buttonText="Guardar"
         >
           <input

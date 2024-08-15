@@ -1,15 +1,121 @@
 import "./index.css";
+import { useState } from "react";
+import PopupWithForm from "./components/PopupWithForm.js";
 import Header from "./components/Header.js";
 import Main from "./components/Main.js";
 import Footer from "./components/Footer.js";
 
 function App() {
+  const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
+
+  function handleEditAvatarClick() {
+    setIsEditAvatarPopupOpen(true);
+  }
+
+  function handleEditProfileClick() {
+    setIsEditProfileOpen(true);
+  }
+
+  function handleAddPlaceClick() {
+    setIsAddPlacePopupOpen(true);
+  }
+
+  function closeAllPopups() {
+    setIsAddPlacePopupOpen(false);
+    setIsEditAvatarPopupOpen(false);
+    setIsEditProfileOpen(false);
+  }
   return (
     <div className="App body">
       <div className="page">
         <Header />
-        <Main />
+        <Main
+          onEditProfileClick={handleEditProfileClick}
+          onAddPlaceClick={handleAddPlaceClick}
+          onEditAvatarClick={handleEditAvatarClick}
+          onCardClick
+        />
         <Footer />
+        <PopupWithForm
+          isOpen={isEditAvatarPopupOpen}
+          onClose={closeAllPopups}
+          title="Cambiar foto de perfil"
+          name="avatar"
+          buttonText="Guardar"
+        >
+          <input
+            required
+            id="input__avatar-url"
+            type="url"
+            placeholder="Enlace a la nueva foto de perfil"
+            className="popup__input popup__input-avatar"
+            name="avatar-url"
+          />
+          <span className="error-message" id="input__avatar-url-error"></span>
+        </PopupWithForm>
+
+        <PopupWithForm
+          isOpen={isEditProfileOpen}
+          onClose={closeAllPopups}
+          title="Editar perfil"
+          name="avatar"
+          buttonText="Guardar"
+        >
+          <input
+            required
+            id="input__name"
+            type="text"
+            placeholder="Nombre"
+            className="popup__input popup__input-cards"
+            name="name"
+            autoComplete="given-name"
+            minLength="2"
+            maxLength="40"
+          />
+          <span className="error-message" id="input__name-error"></span>
+          <input
+            required
+            id="input__job"
+            type="text"
+            placeholder="Acerca de mi"
+            className="popup__input popup__input-cards"
+            name="job"
+            minLength="2"
+            maxLength="400"
+          />
+          <span className="error-message" id="input__job-error"></span>
+        </PopupWithForm>
+
+        <PopupWithForm
+          isOpen={isAddPlacePopupOpen}
+          onClose={closeAllPopups}
+          title="Agregar carta"
+          name="avatar"
+          buttonText="Guardar"
+        >
+          <input
+            required
+            id="input__title"
+            className="popup__input"
+            type="text"
+            placeholder="Titulo"
+            name="title"
+            minLength="2"
+            maxLength="30"
+          />
+          <span className="error-message" id="input__title-error"></span>
+          <input
+            required
+            id="input__url"
+            className="popup__input"
+            type="url"
+            placeholder="Enlace a la imagen"
+            name="url"
+          />
+          <span className="error-message" id="input__url-error"></span>
+        </PopupWithForm>
       </div>
     </div>
   );

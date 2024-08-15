@@ -1,6 +1,6 @@
 import logo from "../images/logo.svg";
 
-function Header() {
+export default function Header() {
   return (
     <header className="header">
       <img src={logo} alt="logo Around the U.S." className="header__logo" />
@@ -8,5 +8,3 @@ function Header() {
     </header>
   );
 }
-
-export default Header;

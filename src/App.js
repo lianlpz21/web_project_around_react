@@ -1,14 +1,18 @@
 import "./index.css";
 import { useState } from "react";
-import PopupWithForm from "./components/PopupWithForm.js";
 import Header from "./components/Header.js";
 import Main from "./components/Main.js";
 import Footer from "./components/Footer.js";
+import PopupWithForm from "./components/PopupWithForm.js";
+import ImagePopup from "./components/ImagePopup.js";
+import Card from "./components/Card.js";
 
 function App() {
   const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
+  const [selectedCard, setSelectedCard] = useState(null);
+  const [isImagePopupOpen, setIsImagePopupOpen] = useState(false);
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
@@ -22,11 +26,19 @@ function App() {
     setIsAddPlacePopupOpen(true);
   }
 
+  function handleCardClick(card) {
+    setSelectedCard(card);
+    setIsImagePopupOpen(true);
+  }
+
   function closeAllPopups() {
     setIsAddPlacePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
     setIsEditProfileOpen(false);
+    setIsImagePopupOpen(false);
+    setSelectedCard(null);
   }
+
   return (
     <div className="App body">
       <div className="page">
@@ -35,7 +47,7 @@ function App() {
           onEditProfileClick={handleEditProfileClick}
           onAddPlaceClick={handleAddPlaceClick}
           onEditAvatarClick={handleEditAvatarClick}
-          onCardClick
+          onCardClick={handleCardClick}
         />
         <Footer />
         <PopupWithForm
@@ -116,6 +128,12 @@ function App() {
           />
           <span className="error-message" id="input__url-error"></span>
         </PopupWithForm>
+
+        <ImagePopup
+          card={selectedCard}
+          isOpen={isImagePopupOpen}
+          onClose={closeAllPopups}
+        />
       </div>
     </div>
   );

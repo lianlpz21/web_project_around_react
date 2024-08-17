@@ -1,16 +1,21 @@
 export default function Card(props) {
+  function handleClick() {
+    props.onCardClick(props.card);
+  }
+
   return (
-    <figure className="card">
+    <figure className="card" onClick={handleClick}>
       <img
         className="card__image"
-        alt=""
-        style={{ backgroundImage: `url(${props.link})` }}
+        alt={props.card.name}
+        src={props.card.link}
       />
+
       <button className="card__trash"></button>
       <footer className="card__footer">
-        <figcaption className="card__title">{props.name}</figcaption>
+        <figcaption className="card__title">{props.card.name}</figcaption>
         <button className="card__like"></button>
-        <span className="card__like-counter">{props.likes.length}</span>
+        <span className="card__like-counter">{props.card.likes.length}</span>
       </footer>
     </figure>
   );

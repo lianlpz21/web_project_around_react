@@ -1,9 +1,20 @@
-export default function ImagePopup() {
+export default function ImagePopup({ card, isOpen, onClose }) {
   return (
-    <dialog className="modal">
-      <img className="modal__image" alt="" />
-      <span className="modal__title"></span>
-      <button className="modal__icon-close"></button>
-    </dialog>
+    <div className={`popup popup_type_image ${isOpen ? "popup_opened" : ""}`}>
+      <div className="overlay"></div>
+      <div className="popup__content">
+        <button
+          className="popup__close-button popup__icon"
+          type="button"
+          onClick={onClose}
+        ></button>
+        {card && (
+          <>
+            <img className="popup__image" alt={card.name} src={card.link} />
+            <p className="popup__caption">{card.name}</p>
+          </>
+        )}
+      </div>
+    </div>
   );
 }

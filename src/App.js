@@ -5,7 +5,6 @@ import Main from "./components/Main.js";
 import Footer from "./components/Footer.js";
 import PopupWithForm from "./components/PopupWithForm.js";
 import ImagePopup from "./components/ImagePopup.js";
-import Card from "./components/Card.js";
 
 function App() {
   const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);

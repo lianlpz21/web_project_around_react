@@ -15,6 +15,8 @@
   height: 150px; /* Ajusta según tu diseño */
   border-radius: 50%;
   overflow: hidden;
+  background-position: center;
+  background-size: cover;
 }
 
 .profile__avatar-edit-btn {

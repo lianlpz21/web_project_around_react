@@ -25,14 +25,13 @@ export default function Main(props) {
       setCards(response);
     }
     getCards();
-  });
+  }, []);
 
   return (
     <main className="content">
       <section className="profile">
         <div className="profile__avatar-container">
-          <img
-            // src={avatar}
+          <div
             style={{ backgroundImage: `url(${userAvatar})` }}
             alt="imagen de perfil"
             className="profile__avatar"

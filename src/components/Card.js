@@ -4,8 +4,9 @@ export default function Card(props) {
   }
 
   return (
-    <figure className="card" onClick={handleClick}>
+    <figure className="card">
       <img
+        onClick={handleClick}
         className="card__image"
         alt={props.card.name}
         src={props.card.link}

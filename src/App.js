@@ -6,6 +6,7 @@ import Footer from "./components/Footer.js";
 import PopupWithForm from "./components/PopupWithForm.js";
 import ImagePopup from "./components/ImagePopup.js";
 import api from "./utils/api.js";
+import CurrentUserContext from "./contexts/CurrentUserContext.js";
 
 function App() {
   const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
@@ -57,12 +58,15 @@ function App() {
     <div className="App body">
       <div className="page">
         <Header />
-        <Main
-          onEditProfileClick={handleEditProfileClick}
-          onAddPlaceClick={handleAddPlaceClick}
-          onEditAvatarClick={handleEditAvatarClick}
-          onCardClick={handleCardClick}
-        />
+        <CurrentUserContext.Provider value={currentUser}>
+          <Main
+            onEditProfileClick={handleEditProfileClick}
+            onAddPlaceClick={handleAddPlaceClick}
+            onEditAvatarClick={handleEditAvatarClick}
+            onCardClick={handleCardClick}
+          />
+        </CurrentUserContext.Provider>
+
         <Footer />
         <PopupWithForm
           isOpen={isEditAvatarPopupOpen}

@@ -1,23 +1,12 @@
 // import avatar from "../images/avatar.jpg";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import api from "../utils/api";
 import Card from "./Card";
+import CurrentUserContext from "../contexts/CurrentUserContext";
 
 export default function Main(props) {
-  const [userName, setUserName] = useState("");
-  const [userDescription, setUserDescription] = useState("");
-  const [userAvatar, setUserAvatar] = useState("");
   const [cards, setCards] = useState([]);
-
-  useEffect(() => {
-    async function getUserInfo() {
-      const response = await api.getUserInfo();
-      setUserAvatar(response.avatar);
-      setUserName(response.name);
-      setUserDescription(response.about);
-    }
-    getUserInfo();
-  }, []);
+  const currentUser = useContext(CurrentUserContext);
 
   useEffect(() => {
     async function getCards() {
@@ -27,12 +16,16 @@ export default function Main(props) {
     getCards();
   }, []);
 
+  if (!currentUser) {
+    return <div>Cargando...</div>;
+  }
+
   return (
     <main className="content">
       <section className="profile">
         <div className="profile__avatar-container">
           <div
-            style={{ backgroundImage: `url(${userAvatar})` }}
+            style={{ backgroundImage: `url(${currentUser.avatar})` }}
             alt="imagen de perfil"
             className="profile__avatar"
           />
@@ -43,12 +36,12 @@ export default function Main(props) {
           ></button>
         </div>
         <div className="profile__info">
-          <h1 className="profile__name">{userName}</h1>
+          <h1 className="profile__name">{currentUser.name}</h1>
           <button
             className="profile__edit-btn"
             onClick={props.onEditProfileClick}
           ></button>
-          <p className="profile__occupation">{userDescription}</p>
+          <p className="profile__occupation">{currentUser.about}</p>
         </div>
         <button
           className="profile__add-btn"

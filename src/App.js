@@ -21,7 +21,6 @@ function App() {
       try {
         const userInfo = await api.getUserInfo();
         setCurrentUser(userInfo);
-        console.log(userInfo);
       } catch (error) {
         console.log("Error al obtener la información del usuario", error);
       }

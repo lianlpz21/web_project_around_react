@@ -1,10 +1,11 @@
 import "./index.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "./components/Header.js";
 import Main from "./components/Main.js";
 import Footer from "./components/Footer.js";
 import PopupWithForm from "./components/PopupWithForm.js";
 import ImagePopup from "./components/ImagePopup.js";
+import api from "./utils/api.js";
 
 function App() {
   const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
@@ -12,6 +13,20 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
   const [isImagePopupOpen, setIsImagePopupOpen] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
+
+  useEffect(() => {
+    async function fetchUserInfo() {
+      try {
+        const userInfo = await api.getUserInfo();
+        setCurrentUser(userInfo);
+        console.log(userInfo);
+      } catch (error) {
+        console.log("Error al obtener la información del usuario", error);
+      }
+    }
+    fetchUserInfo();
+  }, []);
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);

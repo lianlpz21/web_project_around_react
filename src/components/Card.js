@@ -8,9 +8,17 @@ export default function Card(props) {
     props.onCardClick(props.card);
   }
 
+  function handleLikeClick() {
+    props.onCardLike(props.card);
+  }
+
+  function handleDeleteClick() {
+    props.onCardDelete(props.card._id);
+  }
+
   // Verificando si el usuario actual es el propietario de la tarjeta actual
   const isOwn = props.card.owner._id === currentUser._id;
-  console.log(isOwn);
+
   // Creando una variable que después establecerás en `className` para el botón eliminar
   const cardDeleteButtonClassName = `card__delete-button ${
     isOwn ? "card__delete-button_visible" : "card__delete-button_hidden"
@@ -33,10 +41,19 @@ export default function Card(props) {
         src={props.card.link}
       />
 
-      <button className={cardDeleteButtonClassName}></button>
+      <button
+        className={cardDeleteButtonClassName}
+        onClick={handleDeleteClick}
+        aria-label="Eliminar tarjeta"
+      ></button>
+
       <footer className="card__footer">
         <figcaption className="card__title">{props.card.name}</figcaption>
-        <button className={cardLikeButtonClassName}></button>
+        <button
+          className={cardLikeButtonClassName}
+          onClick={handleLikeClick}
+          aria-label="Like tarjeta"
+        ></button>
         <span className="card__like-counter">{props.card.likes.length}</span>
       </footer>
     </figure>

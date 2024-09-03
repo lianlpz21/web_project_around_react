@@ -20,6 +20,27 @@ export default function Main(props) {
     return <div>Cargando...</div>;
   }
 
+  function handleCardLike(card) {
+    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    api
+      .changeLikeCardStatus(card._id, !isLiked)
+      .then((newCard) => {
+        setCards((state) =>
+          state.map((c) => (c._id === card._id ? newCard : c))
+        );
+      })
+      .catch((err) => console.error(err));
+  }
+
+  function handleCardDelete(cardId) {
+    api
+      .deleteCard(cardId)
+      .then(() => {
+        setCards((state) => state.filter((c) => c._id !== cardId));
+      })
+      .catch((err) => console.error(err));
+  }
+
   return (
     <main className="content">
       <section className="profile">
@@ -59,6 +80,8 @@ export default function Main(props) {
               likes={card.likes}
               card={card}
               onCardClick={props.onCardClick}
+              onCardLike={handleCardLike}
+              onCardDelete={handleCardDelete}
             />
           );
         })}

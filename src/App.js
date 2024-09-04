@@ -7,6 +7,7 @@ import ImagePopup from "./components/ImagePopup";
 import EditProfilePopup from "./components/EditProfilePopup";
 import api from "./utils/api";
 import CurrentUserContext from "./contexts/CurrentUserContext";
+import EditAvatarPopup from "./components/EditAvatarPopup";
 
 function App() {
   const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
@@ -54,7 +55,6 @@ function App() {
   }
 
   function handleUpdateUser(userData) {
-    console.log(userData);
     api
       .setUserInfo(userData)
       .then((updatedUser) => {
@@ -63,6 +63,18 @@ function App() {
       })
       .catch((error) => {
         console.log("Error al actualizar el perfil", error);
+      });
+  }
+
+  function handleUpdateAvatar({ avatar }) {
+    api
+      .setUserAvatar(avatar)
+      .then((updatedUser) => {
+        setCurrentUser(updatedUser);
+        closeAllPopups();
+      })
+      .catch((error) => {
+        console.log("Error al actualizar el avatar", error);
       });
   }
 
@@ -82,24 +94,14 @@ function App() {
             onClose={closeAllPopups}
             onUpdateUser={handleUpdateUser}
           />
-          <Footer />
-          <PopupWithForm
+
+          <EditAvatarPopup
             isOpen={isEditAvatarPopupOpen}
             onClose={closeAllPopups}
-            title="Cambiar foto de perfil"
-            name="avatar"
-            buttonText="Guardar"
-          >
-            <input
-              required
-              id="input__avatar-url"
-              type="url"
-              placeholder="Enlace a la nueva foto de perfil"
-              className="popup__input popup__input-avatar"
-              name="avatar-url"
-            />
-            <span className="error-message" id="input__avatar-url-error"></span>
-          </PopupWithForm>
+            onUpdateAvatar={handleUpdateAvatar}
+          />
+
+          <Footer />
 
           <PopupWithForm
             isOpen={isAddPlacePopupOpen}

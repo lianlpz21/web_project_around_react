@@ -75,11 +75,11 @@ class Api {
     }).then(this._checkResponse);
   }
 
-  updateProfilePicture(avatarUrl) {
+  setUserAvatar(avatar) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
-      body: JSON.stringify({ avatar: avatarUrl }),
+      body: JSON.stringify({ avatar: avatar }),
     }).then((response) => {
       if (!response.ok) {
         return Promise.reject(`Error: ${response.status}`);
